@@ -1,0 +1,23 @@
+.fcontainer{
+    border: 2px black solid;
+    height: 300px;
+    display: flex;
+/* flex-wrap: wrap; */
+/* flex-flow: column wrap; */
+/* align-items: center;
+justify-content: center; */
+/* justify-content: space-around; */
+}
+
+.fitem{
+    background-color: brown;
+width: 122px;
+height: 122px;
+border: 2px black solid;
+
+}
+
+.item1
+{
+    order:4
+}
