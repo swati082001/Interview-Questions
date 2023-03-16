@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <link rel="stylesheet" href="../styles/ad.css">
+    <title>Ad page</title>
+  </head>
+  <body>
+    <div id="nav"></div>
+    <div class="formDiv">
+        <form id="adForm">
+          <h1>Add Product</h1>
+            <div>
+                <label>Type of Furniture</label>
+                <select name="type" id="" required>
+                    <option value="" selected disabled>Select type of Furniture</option>
+                    <option value="table">table</option>
+                    <option value="bed">bed</option>
+                    <option value="chair">chair</option>
+                    <option value="sofa">sofa</option>
+                </select>
+            </div>
+            <div>
+                <label>Year of purchase</label>
+                <select name="year" id="" required>
+                    <option value="" selected disabled>Select Year of Purchase</option>
+                    <option value="2022">2022</option>             
+                    <option value="2021">2021</option>
+                    <option value="2020">2020</option>
+                    <option value="2019">2019</option>
+                    <option value="2018">2018</option>
+                </select>
+            </div>
+            <div>
+                <label>Description</label>
+                <textarea id="" cols="50" rows="10" name="Description" placeholder="Description" required></textarea>          
+            </div>
+            <div>
+                <label>Price</label>
+                <input type="number" name="Price" placeholder="Price" required>
+            </div>
+            <div>
+                <input type="submit" value="Get OTP">
+            </div>
+        </form>
+    </div>
+
+    <div id="popDiv">
+        <div>
+          <h3>Enter OTP</h3>
+          <input
+            type="text"
+            id="ist"
+            maxlength="1"
+            onkeyup="nextInput(this,'sec')"            
+          />
+          <input
+            type="text"
+            id="sec"
+            maxlength="1"
+            onkeyup="nextInput(this,'third')"
+          />
+          <input
+            type="text"
+            id="third"
+            maxlength="1"
+            onkeyup="nextInput(this,'fourth')"
+          />
+          <input 
+            type="text" 
+            id="fourth" 
+            maxlength="1" 
+            />
+  
+          <button id="otp-verification" onclick="checkOtp()">Submit</button>
+        </div>
+    </div>
+
+  </body>
+</html>
+<script type="module">
+  import { NavbarForOtherpages } from "../components/navbar.js";
+  document.getElementById("nav").innerHTML = NavbarForOtherpages();
+</script>
+<script src="../scripts/ad.js"></script>

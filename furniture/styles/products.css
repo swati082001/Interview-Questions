@@ -1,0 +1,98 @@
+#carcContainer{
+    width: 90%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+#carcContainer>div{
+    border: 1px solid red;
+    padding: 10px;
+    border-radius: 5px;
+}
+#carcContainer>div>img{
+    width: 100%;
+}
+
+#popDiv{
+    display: none;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    width: 100vw;
+    min-height: 100vh;   
+    /* display: grid; */
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4);
+}
+#popDiv>div{ 
+    transition: all ease-in-out .5s;  
+    text-align: center;
+    padding: 50px;  
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;    
+}
+
+
+#adForm{   
+    margin: auto;
+    margin-top: 10%;
+    width: 50%;
+    border: 2px solid #ccc;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    
+}
+#adForm>div{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    
+}
+#adForm>div>label{
+    margin-top: 20px;
+}
+#adForm>div>input{
+    font-size: large;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    
+}
+#adForm>div>input:focus{
+    transition: .5s;
+    outline: 2px solid #ccc;
+}
+#adForm>div>input[type="submit"]{
+    cursor: pointer;
+    margin-top: 20px;
+    border: none;
+    padding: 5px;
+    font-size: large;
+    color: #fff;
+    background-color: blue;
+    border-radius: 5px;
+}
+#adForm>div>input[type="submit"]:hover{
+    transition: .5s;
+    background-color: rgb(4, 4, 175);
+}
+
+.sortDiv{
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+    font-size: 15px;
+    font-weight: bold;
+}
+.sortDiv>div>select{
+    padding: 5px;
+    border-radius: 5px;    
+}

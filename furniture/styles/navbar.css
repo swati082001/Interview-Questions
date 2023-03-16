@@ -1,0 +1,26 @@
+body{
+    margin: 0;
+}
+#navbar {
+  margin: auto;
+  /* max-width: 1280px; */
+  width: 96%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 30px;
+  font-size: large;
+  font-weight: bold;  
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  background-color:rgb(11, 212, 212);
+}
+.routes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 50px;
+}
+#navbar>div>a{
+    text-decoration: none;
+    color:teal;
+}
