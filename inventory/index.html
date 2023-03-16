@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    
+    <input type="text" id="name" placeholder="Enter Product Nmae">
+ <input type="number" id="price" placeholder="Enter Price">
+ <input type="text" id="description" placeholder="Enter Description">
+ <input type="date" id="delivery" placeholder="Enter Delivery Date">
+ <input type="text" id="image" placeholder="Enter Image">
+ <button id="add_product" onclick="addproduct()">Add product</button>
+
+ <button id="previous" onclick="previous()">previous</button>
+ <button onclick="next()">next</button>
+
+ <button id="sort-low-to-high" onclick="low()">Low to High</button>
+    <button id="sort-high-to-low" onclick="high()">High to Low</button>
+
+    <button id="greater-than" onclick="greaterp()">Greater than(p)</button>
+ <button id="less-than" onclick="lessp()">Less than(p)</button>
+ 
+ <div id="container"></div>
+
+</body>
+</html>
+<script src="./index.js"></script>
