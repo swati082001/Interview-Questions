@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        background-color: teal;
+        padding: 30px;
+        position: sticky;
+      }
+
+      .navbar a {
+        text-decoration: none;
+        color: aliceblue;
+        font-size: 18px;
+      }
+
+      .navbar a:hover {
+        color: red;
+        font-size: 18px;
+      }
+
+      .container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        margin-top: 30px;
+        padding: 20px;
+      }
+      .mDiv {
+        border: 1px solid black;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="index.html">Home Page</a>
+      <a href="orders.html">Order Page</a>
+    </div>
+    <div class="sort-filter">
+      <div class="sort">
+        <select id="sort">
+          <option value="">sort by price</option>
+          <option value="asc">ASCENDING</option>
+          <option value="desc">DESCENDING</option>
+        </select>
+      </div>
+      <div class="filter">
+        <input type="number" id="lesser-value" placeholder="Lesser Value" />
+        <input type="number" id="greater-value" placeholder="Greater Value" />
+        <button id="filter">FILTER</button>
+      </div>
+      <div class="search">
+        <input type="text" id="search" />
+        <button id="btn-search">Search</button>
+      </div>
+    </div>
+    <div class="container"></div>
+    <div class="pagination-container">
+      <button id="prev">PREV</button>
+      <button id="next">NEXT</button>
+    </div>
+  </body>
+</html>
+<script>
+  let container = document.querySelector(".container");
+  let pagina = 1;
+  let getData = async () => {
+    let res = await fetch(
+      `https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-coffee?page=${pagina}&limit=10`
+    );
+    res = await res.json();
+    console.log(res.data);
+    display(res.data);
+  };
+  getData();
+
+  function display(data) {
+    container.innerHTML = "";
+
+    data.forEach((el, i) => {
+      let mDiv = document.createElement("div");
+
+      let image = document.createElement("img");
+      image.src = el.image;
+      image.style.width = "200px";
+      image.style.height = "200px";
+
+      let title = document.createElement("h5");
+      title.innerText = el.title;
+
+      let price = document.createElement("h4");
+      price.innerText = el.price;
+
+      let ingredients = document.createElement("p");
+      ingredients.innerText = el.ingredients[0];
+
+      mDiv.append(image, title, price, ingredients);
+      container.append(mDiv);
+    });
+  }
+
+  //sorting
+  let sort = document.querySelector("#sort");
+
+  sort.addEventListener("change", async () => {
+    let sorting = document.querySelector("#sort").value;
+    let res = await fetch(
+      `https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-coffee?page=${pagina}&limit=10&sort=price&order=${sorting}`
+    );
+
+    res = await res.json();
+    display(res.data);
+  });
+
+  //filtering
+
+  let button = document.querySelector("#filter");
+  button.addEventListener("click", async () => {
+    let lte = document.querySelector("#lesser-value").value;
+    let gte = document.querySelector("#greater-value").value;
+    let res = await fetch(
+      `https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-coffee?page=${pagina}&limit=10`
+    );
+
+    res = await res.json();
+    display(res.data);
+  });
+
+  //search
+
+  document.querySelector("#btn-search").addEventListener("click", async () => {
+    let searching = document.querySelector("#search").value;
+    console.log(searching);
+    let res = await fetch(
+      `https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-coffee?q=${searching}`
+    );
+    res = await res.json();
+    display(res.data);
+  });
+
+  //pagination
+
+  let prev = document.querySelector("#prev");
+  prev.addEventListener("click", () => {
+    pagina--;
+    getData(pagina);
+  });
+
+  let next = document.querySelector("#next");
+  next.addEventListener("click", () => {
+    pagina++;
+    getData(pagina);
+  });
+</script>
