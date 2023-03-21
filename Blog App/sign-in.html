@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="sign-in.css" />
+    <title>Sign-in Page</title>
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="/index.html">Sign-up Page</a>
+      <a href="/sign-in.html">Sign-in Page</a>
+      <a href="/blogs.html">Blogs Page</a>
+      <a href="/add-blog.html">Add Blog Page</a>
+      <a href="/leaderboard.html">Leaderboard Page</a>
+    </div>
+    <div class="container">
+      <form action="" id="form">
+        <label for="">Email</label>
+        <input type="email" placeholder="Email" id="email" />
+        <label for="">Password</label>
+        <input type="password" placeholder="Password" id="password" />
+        <input type="submit" />
+      </form>
+    </div>
+  </body>
+</html>
+<script>
+  let form = document.querySelector("form");
+  form.addEventListener("submit", handleLogin);
+
+  function handleLogin(e) {
+    e.preventDefault();
+
+    let signInData = {
+      email: document.querySelector("#email").value,
+      password: document.querySelector("#password").value,
+    };
+
+    fetch(
+      `https://mocksixapi.onrender.com/users?email=${signInData.email}&password=${signInData.password}`,
+      {
+        method: "GET",
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.length > 0) {
+          alert("Login Successfull !");
+          window.location.href = "blogs.html";
+          localStorage.setItem(
+            "token",
+            JSON.stringify({ status: true, username: data[0].name })
+          );
+        } else {
+          alert("Login failed");
+        }
+      })
+      .catch((err) => {
+        alert("Something went wrong ! pleae try again");
+      });
+  }
+</script>

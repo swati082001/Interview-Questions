@@ -1,0 +1,44 @@
+.navbar
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:30px;
+    padding: 40px;
+    background-color: lightcoral;
+
+}
+
+.navbar a{
+    text-decoration: solid;
+    color: aliceblue;
+}
+
+.navbar a:hover{
+    color: blue;
+}
+
+.blogs-container{
+    margin-top: 30px;
+}
+
+.filter-sort-search
+{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.mDiv
+{
+    border:2px solid black
+}
+
+#post_edit_modal
+{
+    display: none;
+}
+#comment_modal
+{
+    display: none;
+}

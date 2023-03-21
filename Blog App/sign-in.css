@@ -1,0 +1,45 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.navbar
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:30px;
+    padding: 40px;
+    background-color: lightcoral;
+
+}
+
+.navbar a{
+    text-decoration: solid;
+    color: aliceblue;
+}
+
+.navbar a:hover{
+    color: blue;
+}
+
+#form
+{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    margin: auto;
+    justify-content:center;
+    align-items: center;
+    margin-top: 40px;
+}
+
+
+
+#form input
+{
+    
+    width: 250px;
+    padding: 10px;
+}

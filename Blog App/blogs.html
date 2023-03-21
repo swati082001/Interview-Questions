@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="blogs.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="/index.html">Sign-up Page</a>
+      <a href="/sign-in.html">Sign-in Page</a>
+      <a href="/blogs.html">Blogs Page</a>
+      <a href="/add-blog.html">Add Blog Page</a>
+      <a href="/leaderboard.html">Leaderboard Page</a>
+    </div>
+    <h1>Blogs Page</h1>
+    <div class="filter-sort-search">
+      <div class="search">
+        <input type="text" placeholder="Search here" />
+      </div>
+      <div class="filter"></div>
+      <div class="sort"></div>
+    </div>
+    <div class="blogs-container"></div>
+    <div id="post_edit_modal">
+      <textarea name="" id="edit_content" cols="30" rows="10"></textarea>
+
+      <button id="editPostButton">Edit Blog</button>
+      <button id="closeEditPostButton">close</button>
+    </div>
+    <div id="comment_modal">
+      <textarea name="" id="comment_area" cols="30" rows="5"></textarea>
+      <button id="post_comment">Comment</button>
+      <button id="close_comment">Close</button>
+    </div>
+    <div class="pagination-container">
+      <button id="prev">PREV</button><button id="next">NEXT</button>
+    </div>
+  </body>
+</html>
+<script>
+  let blogsContainer = document.querySelector(".blogs-container");
+
+  let page = 1;
+  getBlogs();
+  function getBlogs() {
+    fetch(`https://mocksixapi.onrender.com/blogs?_page=${page}&_limit=4`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        display(data);
+      });
+  }
+
+  function display(blogs) {
+    blogsContainer.innerHTML = "";
+
+    blogs.forEach((el) => {
+      let mDiv = document.createElement("div");
+      mDiv.setAttribute("class", "mDiv");
+      let image = document.createElement("image");
+      image.src = el.image;
+
+      let name = document.createElement("h5");
+      name.innerText = el.username;
+      let title = document.createElement("h5");
+      title.innerText = el.title;
+      let category = document.createElement("h5");
+      category.innerText = el.category;
+      let date = document.createElement("p");
+      date.innerText = el.date;
+      let content = document.createElement("p");
+      content.innerText = el.content;
+      let likes = document.createElement("button");
+      likes.innerText = `Like ${el.likes}`;
+      likes.setAttribute("class", "like");
+      likes.addEventListener("click", () => {
+        fetch(`https://mocksixapi.onrender.com/blogs/${el.id}`, {
+          method: "PATCH",
+          body: JSON.stringify({ likes: el.likes + 1 }),
+          headers: {
+            "Content-type": "application/json",
+          },
+        })
+          .then((res) => getBlogs())
+          .catch((err) => console.log(err.message));
+      });
+      // let comments = document.createElement("p");
+      // let comment = el.comments.length;
+      // comments.innerText = comment;
+
+      let remove = document.createElement("button");
+      remove.innerText = "DELETE";
+      remove.addEventListener("click", () => {
+        removeBlog(el.id);
+      });
+
+      let edit = document.createElement("button");
+      edit.innerText = "EDIT";
+      let editModal = document.querySelector("#post_edit_modal");
+      let editPostButton = document.querySelector("#editPostButton");
+      edit.addEventListener("click", () => {
+        editModal.style.display = "block";
+      });
+      editPostButton.addEventListener("click", () => {
+        let editData = document.querySelector("#edit_content").value;
+        fetch(`https://mocksixapi.onrender.com/blogs/${el.id}`, {
+          method: "PATCH",
+          body: JSON.stringify({ content: editData }),
+          headers: {
+            "Content-type": "application/json",
+          },
+        })
+          .then((res) => getBlogs())
+          .catch((err) => console.log(err));
+        editModal.style.display = "none";
+      });
+
+      mDiv.append(
+        image,
+        name,
+        title,
+        date,
+        category,
+        content,
+        likes,
+        remove,
+        edit
+      );
+      blogsContainer.append(mDiv);
+    });
+  }
+
+  //increase like count
+
+  //removeBlog
+
+  function removeBlog(id) {
+    fetch(`https://mocksixapi.onrender.com/blogs/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        getBlogs();
+      });
+  }
+
+  //editBlog
+
+  function editBlog(id) {
+    window.prompt("Add new title");
+
+    let val = window.prompt("Add new title").value;
+
+    fetch(`https://mocksixapi.onrender.com/blogs/${id}`, {
+      method: "DELETE",
+    });
+  }
+
+  //pagination
+
+  let prev = document.querySelector("#prev");
+  prev.addEventListener("click", () => {
+    page--;
+    getBlogs(page);
+  });
+
+  let next = document.querySelector("#next");
+  next.addEventListener("click", () => {
+    page++;
+    getBlogs(page);
+  });
+</script>
