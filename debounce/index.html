@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debouncing</title>
+</head>
+<body>
+    <input type="text" placeholder="enter something" id="input" onchange="newFunc()"/>
+</body>
+</html>
+
+<script>
+    let count=0
+    function handleChange(){
+        console.log("called",count++);
+    }
+
+    const newFunc = debounce(handleChange,1000)
+
+    function debounce(func,delay){
+        let counter;
+        return function(){
+            if(counter){
+                clearTimeout(counter);
+            }
+            else{
+
+                setTimeout(()=>{
+                    func()
+                },delay)
+            }
+            
+        }
+    }
+</script>
