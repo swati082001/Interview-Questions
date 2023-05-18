@@ -121,5 +121,45 @@ class C extends B{
     // }
 }
 
-const payal = new C()
-payal.run(1,2)
+// const payal = new C()
+// payal.run(1,2)
+
+
+const set = new Set()
+set.add(1)
+set.add("Lydia")
+set.add({name:"Lydia"})
+
+// for(let item of set){
+//     console.log(item+2,"a")
+    
+// }
+
+// function Greeting(){
+//     throw "hello world";
+// }
+
+// function SayHi(){
+//     try {
+//         let data = Greeting()
+//         console.log("it worked",data)
+//     } catch (error) {
+//         console.log("Oh no",error)
+//     }
+// }
+
+
+function Person(){
+    console.log(this)
+}
+
+const person = ()=>{
+    console.log(this)
+}
+
+person()
+
+// let Lydia = new Person("suneet","panigrahi")
+// let sarah = Person("nitin","kumar")
+// console.log(Lydia)
+// console.log(sarah)
